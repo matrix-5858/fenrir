@@ -948,6 +948,69 @@ DEVICES = [
                 description='Prevent LK from relocking seccfg',
             )
         },
-        cert_bypass=True
+        cert_bypass=CertBypass.OVERRIDE
+    ),
+    Device(
+        'emerald-HOS3',
+        'REDMI Note 13 Pro/POCO M6 Pro 4G',
+        {
+            'sec_get_vfy_policy': PatchStage(
+                'sec_get_vfy_policy',
+                pattern='00 01 00 b4 fd 7b bf a9',
+                replacement='00 00 80 52 c0 03 5f d6',
+                match_mode=MatchMode.ALL,
+                description='Don\'t enforce secure boot policy',
+            ),
+            'sec_get_vfy_policy_inlined': PatchStage(
+                'sec_get_vfy_policy_inlined',
+                pattern='88 00 80 52 a0 73 00 91 a8 1f 00 b9 9b 54 ff 97',
+                replacement='68 00 80 52 a0 73 00 91 a8 1f 00 b9 00 00 80 52',
+                match_mode=MatchMode.ALL,
+                description='Don\'t enforce secure boot policy, inlined usage',
+            ),
+            'sec_get_vfy_policy_inlined2': PatchStage(
+                'sec_get_vfy_policy_inlined2',
+                pattern='88 00 80 52 a0 73 00 91 a8 1f 00 b9 9d 53 ff 97',
+                replacement='68 00 80 52 a0 73 00 91 a8 1f 00 b9 00 00 80 52',
+                match_mode=MatchMode.ALL,
+                description='Don\'t enforce secure boot policy, second inlined usage',
+            ),
+            'force_green_state': PatchStage(
+                'force_green_state',
+                pattern='68 03 00 b0 00 21 08 b9 c0 03 5f d6',
+                replacement='68 03 00 b0 1f 21 08 b9 c0 03 5f d6',
+                match_mode=MatchMode.ALL,
+                description='Force boot state to always be set to green',
+            ),
+            'bypass_security_control': PatchStage(
+                'bypass_security_control',
+                pattern='e8 0b 40 b9 1f 0d 00 71 c0 00 00 54',
+                replacement='e8 0b 40 b9 1f 0d 00 71 06 00 00 14',
+                match_mode=MatchMode.ALL,
+                description='Skip security error branch - always execute commands',
+            ),
+            'spoof_sboot_state': PatchStage(
+                'spoof_get_sboot_state',
+                pattern='fd 7b be a9 f3 0b 00 f9 fd 03 00 91 f3 03 00 aa 20 00 80 52 c4',
+                replacement='48 04 80 52 08 00 00 b9 00 00 80 52 c0 03 5f d6 1f 20 03 d5 c4',
+                match_mode=MatchMode.ALL,
+                description='Force sboot state to always be ATTR_SBOOT_ONLY_ENABLE_ON_SCHIP',
+            ),
+            'spoof_lock_state': PatchStage(
+                'spoof_lock_state',
+                pattern='20 02 00 b4 fd 7b be a9 f3 0b 00 f9 fd 03 00 91',
+                replacement='88 00 80 52 08 00 00 b9 00 00 80 52 c0 03 5f d6',
+                match_mode=MatchMode.ALL,
+                description='Force lock state to always be LKS_LOCK',
+            ),
+            'dont_relock_seccfg': PatchStage(
+                'dont_relock_seccfg',
+                pattern='fd 7b be a9 f3 0b 00 f9 fd 03 00 91 f3 03 00 2a 28 00 80 52',
+                replacement='00 00 80 52 c0 03 5f d6 1f 20 03 d5 1f 20 03 d5 1f 20 03 d5',
+                match_mode=MatchMode.ALL,
+                description='Prevent LK from relocking seccfg',
+            )
+        },
+        cert_bypass=CertBypass.OVERRIDE
     ),
 ]
