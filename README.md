@@ -101,11 +101,17 @@ The following devices are currently supported:
 | Tecno Pova 4 Pro | `LG8n` |
 | Tecno Pova 5 | `LH7n` |
 | Zinwa Q25 | `Q25` |
+| REDMI Note 13 Pro/POCO M6 Pro 4G | `emerald` |
 | Redmi K70E/POCO X6 Pro 5G | `duchamp` |
 | Redmi Turbo 4/POCO X7 Pro | `rodin` |
 | Redmi Turbo 5 Max/POCO X8 Pro Max | `dash` |
 | Redmi Note 11T Pro/Pro+/POCO X4 GT/Redmi K50i | `xaga` |
 | Xiaomi 12T | `plato` |
+
+
+> [!NOTE]
+> Support for the CMF Phone 1 (`Tetris`) is still incomplete.
+
 
 Adding support for a new device isn’t straightforward, but it is possible with some effort and reverse engineering. A good starting point is to check whether your phone’s `bl2_ext` partition is verified.
 
