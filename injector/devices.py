@@ -905,6 +905,13 @@ DEVICES = [
         'emerald',
         'REDMI Note 13 Pro/POCO M6 Pro 4G',
         {
+            'stage1': PayloadStage(
+                'stage1',
+                0xFFFF000050F00340,
+                0xffff000050F4B668,
+                description='Set state to orange when booting recovery, green otherwise',
+            ),
+
             'sec_get_vfy_policy': PatchStage(
                 'sec_get_vfy_policy',
                 pattern='00 01 00 b4 fd 7b bf a9',
@@ -912,13 +919,16 @@ DEVICES = [
                 match_mode=MatchMode.ALL,
                 description='Don\'t enforce secure boot policy',
             ),
-            'force_green_state': PatchStage(
-                'force_green_state',
-                pattern='e8 02 00 b0 00 f1 0c b9 c0 03 5f d6',
-                replacement='e8 02 00 b0 1f f1 0c b9 c0 03 5f d6',
-                match_mode=MatchMode.ALL,
-                description='Force boot state to always be set to green',
-            ),
+
+            # I set state in my payload code
+
+            # 'force_green_state': PatchStage(
+            #     'force_green_state',
+            #     pattern='e8 02 00 b0 00 f1 0c b9 c0 03 5f d6',
+            #     replacement='e8 02 00 b0 1f f1 0c b9 c0 03 5f d6',
+            #     match_mode=MatchMode.ALL,
+            #     description='Force boot state to always be set to green',
+            # ),
             'bypass_security_control': PatchStage(
                 'bypass_security_control',
                 pattern='e8 0b 40 b9 1f 0d 00 71 c0 00 00 54',
@@ -946,7 +956,8 @@ DEVICES = [
                 replacement='00 00 80 52 c0 03 5f d6 1f 20 03 d5 1f 20 03 d5 1f 20 03 d5',
                 match_mode=MatchMode.ALL,
                 description='Prevent LK from relocking seccfg',
-            )
+            ),
+            
         },
         cert_bypass=CertBypass.OVERRIDE
     ),
