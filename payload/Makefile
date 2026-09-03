@@ -36,6 +36,7 @@ ifeq ($(DEBUG),1)
 CFLAGS += -DDEBUG
 endif
 
+STAGE0_BASE := $(shell grep "^#define STAGE0_BASE" $(DEVICE_HEADER) | awk '{print $$3}')
 STAGE1_BASE := $(shell grep "^#define STAGE1_BASE" $(DEVICE_HEADER) | awk '{print $$3}')
 STAGE2_BASE := $(shell grep "^#define STAGE2_BASE" $(DEVICE_HEADER) | awk '{print $$3}')
 STAGE3_BASE := $(shell grep "^#define STAGE3_BASE" $(DEVICE_HEADER) | awk '{print $$3}')
@@ -43,7 +44,8 @@ STAGE3_BASE := $(shell grep "^#define STAGE3_BASE" $(DEVICE_HEADER) | awk '{prin
 # ============================================================================
 # STAGE DEFINITIONS
 # ============================================================================
-STAGES := stage1:$(STAGE1_BASE) \
+STAGES := stage0:$(STAGE0_BASE) \
+          stage1:$(STAGE1_BASE) \
           stage2:$(STAGE2_BASE) \
           stage3:$(STAGE3_BASE)
 
@@ -107,7 +109,8 @@ device-info:
 	@echo "Current device: $(DEVICE)"
 	@echo "Device header: $(DEVICE_HEADER)"
 	@echo "Stage addresses:"
-	@echo "  stage1: $(STAGE1_BASE)"
+	@echo "  stage0: $(STAGE0_BASE)" 
+	@echo "  stage1: $(STAGE1_BASE)" 
 	@echo "  stage2: $(STAGE2_BASE)"
 	@echo "  stage3: $(STAGE3_BASE)"
 

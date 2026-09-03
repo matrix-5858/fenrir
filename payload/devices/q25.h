@@ -2,6 +2,7 @@
 
 #define DEVICE_NAME "Q25"
 
+#define STAGE0_BASE 0x0
 #define STAGE1_BASE 0xffff000050f23670
 #define STAGE2_BASE 0xffff000050f1f690
 #define STAGE3_BASE 0xffff000050f209e0

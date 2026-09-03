@@ -905,13 +905,12 @@ DEVICES = [
         'emerald',
         'REDMI Note 13 Pro/POCO M6 Pro 4G',
         {
-            'stage1': PayloadStage(
-                'stage1',
+            'stage0': PayloadStage(
+                'stage0',
                 0xFFFF000050F00340,
                 0xffff000050F4B668,
-                description='Set state to orange when booting recovery, green otherwise',
+                description='Dynamic force_green_state patch implementation, sets BOOT_STATE to green when booting to System',
             ),
-
             'sec_get_vfy_policy': PatchStage(
                 'sec_get_vfy_policy',
                 pattern='00 01 00 b4 fd 7b bf a9',
@@ -920,7 +919,7 @@ DEVICES = [
                 description='Don\'t enforce secure boot policy',
             ),
 
-            # I set state in my payload code
+            # !! Replaced by dynamic force_green_state patch implementation !!
 
             # 'force_green_state': PatchStage(
             #     'force_green_state',
@@ -929,6 +928,9 @@ DEVICES = [
             #     match_mode=MatchMode.ALL,
             #     description='Force boot state to always be set to green',
             # ),
+            
+            # !! Replaced by dynamic force_green_state patch implementation !! 
+             
             'bypass_security_control': PatchStage(
                 'bypass_security_control',
                 pattern='e8 0b 40 b9 1f 0d 00 71 c0 00 00 54',
@@ -963,7 +965,7 @@ DEVICES = [
     ),
     Device(
         'emerald-HOS3',
-        'REDMI Note 13 Pro/POCO M6 Pro 4G',
+        'REDMI Note 13 Pro/POCO M6 Pro 4G (HyperOS 3 version)',
         {
             'sec_get_vfy_policy': PatchStage(
                 'sec_get_vfy_policy',
