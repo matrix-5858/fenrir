@@ -901,4 +901,39 @@ DEVICES = [
         },
         cert_bypass=CertBypass.WRAP
     ),
+    Device(
+    'air',
+    'REDMI 13R 5G/REDMI 13C 5G/POCO M6 5G',
+        {
+            'sec_get_vfy_policy': PatchStage(
+                'sec_get_vfy_policy',
+                pattern='00 01 00 b4 fd 7b bf a9',
+                replacement='00 00 80 52 c0 03 5f d6',
+                match_mode=MatchMode.ALL,
+                description='Don\'t enforce secure boot policy',
+            ),
+            'force_green_state': PatchStage(
+                'force_green_state',
+                pattern='68 03 00 f0 00 39 0a b9 c0 03 5f d6',
+                replacement='68 03 00 f0 1f 39 0a b9 c0 03 5f d6',
+                match_mode=MatchMode.ALL,
+                description='Force boot state to always be set to green',
+            ),
+            'spoof_sboot_state': PatchStage(
+                'spoof_get_sboot_state',
+                pattern='fd 7b be a9 f3 0b 00 f9 fd 03 00 91 f3 03 00 aa 20 00 80 52 c6',
+                replacement='48 04 80 52 08 00 00 b9 00 00 80 52 c0 03 5f d6 1f 20 03 d5 c6',
+                match_mode=MatchMode.ALL,
+                description='Force sboot state to always be ATTR_SBOOT_ONLY_ENABLE_ON_SCHIP',
+            ),
+            'spoof_lock_state': PatchStage(
+                'spoof_lock_state',
+                pattern='20 02 00 b4 fd 7b be a9 f3 0b 00 f9 fd 03 00 91',
+                replacement='88 00 80 52 08 00 00 b9 00 00 80 52 c0 03 5f d6',
+                match_mode=MatchMode.ALL,
+                description='Force lock state to always be LKS_LOCK',
+            )
+        },
+        cert_bypass=CertBypass.OVERRIDE
+    ),
 ]
