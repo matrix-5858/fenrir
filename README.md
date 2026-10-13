@@ -1,18 +1,3 @@
-# This repository is deprecated and archived.
-
-## Why?
-
-Mainly because this repository itself sucks. It's pretty much a glorified Python framework for applying binary patches. The only genuinely decent part is the cert bypass logic, which uses liblk anyway.
-
-I initially wanted to add ARM64 support to kaeru so I could replace this with something that has proper payload support. I have a working PoC, but for the reasons explained below, I will not be making it public.
-
-I am **tired** of people making money from my work without proper attribution. Because of that, I have kept most of my projects private for quite a while. I had some tolerance for it initially, but it became exhausting, especially when I started receiving messages every day asking for help with something I do not even advertise.
-
-I appreciate those who contributed, as well as those who were genuinely interested and wanted to learn more about this work. However, I am done with it.
-
-<details>
-<summary>Click to see the old README</summary>
-
 # fenrir
 
 **Language:** [日本語](README_ja-JP.md)
@@ -120,7 +105,7 @@ The following devices are currently supported:
 | Redmi Turbo 4/POCO X7 Pro | `rodin` |
 | Redmi Turbo 5 Max/POCO X8 Pro Max | `dash` |
 | Redmi Note 11T Pro/Pro+/POCO X4 GT/Redmi K50i | `xaga` |
-| Xiaomi 12T | `plato` |
+| Tecno Pova 6 Neo | `li6` |
 
 Adding support for a new device isn’t straightforward, but it is possible with some effort and reverse engineering. A good starting point is to check whether your phone’s `bl2_ext` partition is verified.
 
@@ -156,4 +141,3 @@ Key points to be aware of:
 * You cannot keep modifications private if the software is used to provide a networked service.
 
 For full details, please refer to the [LICENSE](https://github.com/R0rt1z2/fenrir/tree/master/LICENSE) file.
-</details>
