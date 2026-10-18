@@ -912,12 +912,63 @@ DEVICES = [
                 match_mode=MatchMode.ALL,
                 description='Don\'t enforce secure boot policy',
             ),
+            
+             # -- Fixes "Rom Info Invalid or Not Init." --
+            
+            'rom-info-bl2_ext': PatchStage(
+                'rom-info-bl2_ext',
+                pattern='fd 7b bf a9 fd 03 00 91 e8 09 00 f0 2b c8 89 d2',
+                replacement='00 00 80 52 c0 03 5f d6 1f 20 03 d5 1f 20 03 d5',
+                match_mode=MatchMode.ALL,
+                partition='bl2_ext',
+                description='Force rom_info check function to always return zero (in bl2_ext)',
+            ),
+            'rom-info-aee': PatchStage(
+                'rom-info-aee',
+                pattern='fd 7b bf a9 fd 03 00 91 e8 09 00 d0 2b c8 89 d2',
+                replacement='00 00 80 52 c0 03 5f d6 1f 20 03 d5 1f 20 03 d5',
+                match_mode=MatchMode.ALL,
+                partition='aee',
+                description='Force rom_info check function to always return zero (in aee)',
+            ),
+            'rom-info-lk': PatchStage(
+                'rom-info-lk',
+                pattern='fd 7b bf a9 fd 03 00 91 c8 08 00 b0 2b c8 89 d2',
+                replacement='00 00 80 52 c0 03 5f d6 1f 20 03 d5 1f 20 03 d5',
+                match_mode=MatchMode.ALL,
+                partition='lk',
+                description='Force rom_info check function to always return zero (in lk)',
+            ),
+            
+            # -- Fixes "Rom Info Invalid or Not Init." --
+            
             'force_green_state': PatchStage(
                 'force_green_state',
-                pattern='68 03 00 f0 00 39 0a b9 c0 03 5f d6',
-                replacement='68 03 00 f0 1f 39 0a b9 c0 03 5f d6',
+                pattern='68 03 00 b0 00 61 0a b9 c0 03 5f d6',
+                replacement='68 03 00 b0 1f 61 0a b9 c0 03 5f d6',
                 match_mode=MatchMode.ALL,
                 description='Force boot state to always be set to green',
+            ),
+            'bypass_security_control': PatchStage(
+                'bypass_security_control',
+                pattern='d6 67 01 94 20 01 00 35',
+                replacement='d6 67 01 94 1f 20 03 d5',
+                match_mode=MatchMode.ALL,
+                description='Skip security error branch - always execute commands',
+            ),
+            'bypass_cmd_erase_lock_control': PatchStage(
+                'bypass_cmd_erase_lock_control',
+                pattern='a8 1f 40 b9 1f 05 00 71 81 00 00 54',
+                replacement='a8 1f 40 b9 1f 05 00 71 04 00 00 14',
+                match_mode=MatchMode.ALL,
+                description='Skip lock error branch - always execute erase',
+            ),
+            'bypass_cmd_flash_control': PatchStage(
+                'bypass_cmd_flash_control',
+                pattern='e8 07 40 b9 1f 05 00 71 21 01 00 54',
+                replacement='e8 07 40 b9 1f 05 00 71 09 00 00 14',
+                match_mode=MatchMode.ALL,
+                description='Skip lock error branch - always execute flash',
             ),
             'spoof_sboot_state': PatchStage(
                 'spoof_get_sboot_state',
